@@ -10,7 +10,6 @@ License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
 Source:		ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description	
 The GNU Scientific Library (GSL) is a numerical library for C and

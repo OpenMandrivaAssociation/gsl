@@ -4,12 +4,13 @@
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	1.10
+Version:	1.11
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
-Source:		ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
+Source1:	%{SOURCE0}.sig
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description	
@@ -136,7 +137,7 @@ make check
 
 %files progs
 %defattr(-,root,root)
-%doc AUTHORS INSTALL NEWS README THANKS
+%doc AUTHORS NEWS README THANKS
 %{_bindir}/gsl-histogram
 %{_bindir}/gsl-randist
 %{_mandir}/man1/gsl-histogram*

@@ -2,15 +2,16 @@
 %define libname %mklibname %{name} %major
 %define develname %mklibname %{name} -d
 
-Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	1.11
-Release:	%mkrel 1
+Release:	%mkrel 3
+Summary:	The GNU Scientific Library for numerical analysis
 License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
+Patch0:		gsl-1.11-undefined-symbols.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description	
@@ -105,6 +106,7 @@ These are the static libs and include headers for developers.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure2_5x

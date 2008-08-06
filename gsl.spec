@@ -4,7 +4,7 @@
 
 Name:		gsl
 Version:	1.11
-Release:	%mkrel 3
+Release:	%mkrel 4
 Summary:	The GNU Scientific Library for numerical analysis
 License:	GPLv2+
 Group:		Sciences/Mathematics

@@ -2,10 +2,10 @@
 %define libname %mklibname %{name} %major
 %define develname %mklibname %{name} -d
 
-Name:		gsl
-Version:	1.11
-Release:	%mkrel 4
 Summary:	The GNU Scientific Library for numerical analysis
+Name:		gsl
+Version:	1.12
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
@@ -41,7 +41,7 @@ scientific numerical analysis.
 %package progs
 Summary:	Programs of the Scientific Library
 Group:		Sciences/Mathematics
-Requires:	%{libname} = %{version}
+Requires:	%{libname} = %{version}-%{release}
 
 %description progs
 Here're the GNU Scientific Library (GSL) programs:
@@ -87,7 +87,7 @@ Further information can be found in the GSL Reference Manual.
 %package -n %{develname}
 Summary:	Development files for Scientific Library
 Group:		Development/C
-Requires:	%{libname} = %{version}
+Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Obsoletes:	%mklibname %{name} 0 -d

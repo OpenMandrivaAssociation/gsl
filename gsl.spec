@@ -11,7 +11,7 @@ Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
-Patch0:		gsl-1.11-undefined-symbols.patch
+Patch0:		%{name}-1.12-undefined-symbols.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description	

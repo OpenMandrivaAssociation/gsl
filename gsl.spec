@@ -109,6 +109,10 @@ These are the static libs and include headers for developers.
 %patch0 -p1
 
 %build
+# (tpg) gcc-4.3.2 bug http://gcc.gnu.org/bugzilla/show_bug.cgi?id=38051
+export CFLAGS="%{optflags} -fno-strict-aliasing"
+export CXXFLAGS=$CFLAGS
+export CPPCLAGS=$CFLAGS
 %configure2_5x
 
 %make

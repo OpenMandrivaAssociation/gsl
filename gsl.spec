@@ -5,7 +5,7 @@
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	1.12
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
@@ -110,7 +110,7 @@ These are the static libs and include headers for developers.
 
 %build
 # (tpg) gcc-4.3.2 bug http://gcc.gnu.org/bugzilla/show_bug.cgi?id=38051
-export CFLAGS="%{optflags} -fno-strict-aliasing"
+export CFLAGS="%{optflags} -fno-strict-aliasing -fPIC"
 export CXXFLAGS=$CFLAGS
 export CPPCLAGS=$CFLAGS
 %configure2_5x

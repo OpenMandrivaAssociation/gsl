@@ -4,17 +4,17 @@
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	1.13
-Release:	%mkrel 2
+Version:	1.14
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
 Source1:	%{SOURCE0}.sig
-Patch0:		%{name}-1.12-undefined-symbols.patch
+Patch0:		%{name}-1.14-undefined-symbols.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-%description	
+%description
 The GNU Scientific Library (GSL) is a numerical library for C and
 C++ programmers.  It contains over 1000 mathematical routines written
 in ANSI C.  The library follows modern coding conventions, and lends

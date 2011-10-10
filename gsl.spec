@@ -4,8 +4,8 @@
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	1.14
-Release:	%mkrel 3
+Version:	1.15
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/

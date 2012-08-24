@@ -121,29 +121,16 @@ export CPPCLAGS=$CFLAGS
 make check
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %makeinstall_std
 
 #multiarch
 %multiarch_binaries %{buildroot}%{_bindir}/gsl-config
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %post doc
 %_install_info gsl-ref.info
 
 %postun doc
 %_remove_install_info gsl-ref.info
-
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %files progs
 %defattr(-,root,root)
@@ -170,7 +157,6 @@ make check
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_mandir}/man3/*
 %{_mandir}/man1/gsl-config.*

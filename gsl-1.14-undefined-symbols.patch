@@ -1,0 +1,6 @@
+diff -0Naur gsl-1.14//Makefile.in gsl-1.14.tpg//Makefile.in
+--- gsl-1.14//Makefile.in	2010-03-10 10:58:31.000000000 +0000
++++ gsl-1.14.tpg//Makefile.in	2010-03-21 18:53:22.000000000 +0000
+@@ -312 +312 @@
+-	bspline/libgslbspline.la complex/libgslcomplex.la \
++	bspline/libgslbspline.la cblas/libgslcblas.la complex/libgslcomplex.la \

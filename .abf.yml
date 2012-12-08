@@ -1,3 +1,2 @@
 sources:
-  "gsl-1.15.tar.gz:"	d914f84b39a5274b0a589d9b83a66f44cd17ca8e
-  "gsl-1.15.tar.gz.sig:"	a6a59ab2063a99056160cc253113ad396061f9c3
+  "gsl-1.15.tar.gz": d914f84b39a5274b0a589d9b83a66f44cd17ca8e

@@ -5,7 +5,7 @@
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	1.15
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Sciences/Mathematics
 URL:		http://www.gnu.org/software/gsl/
@@ -115,7 +115,9 @@ export CPPCLAGS=$CFLAGS
 %make
 
 %check
+%ifarch %{x86_64}
 make check
+%endif
 
 %install
 %makeinstall_std

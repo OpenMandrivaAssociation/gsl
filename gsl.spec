@@ -1,4 +1,4 @@
-%define major	0
+%define major 0
 %define libname %mklibname %{name} %{major}
 %define libcblas %mklibname %{name}cblas %{major}
 %define devname %mklibname %{name} -d
@@ -6,7 +6,7 @@
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	1.15
-Release:	5
+Release:	6
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
@@ -105,10 +105,6 @@ This package contains the development files for %{name}.
 %apply_patches
 
 %build
-# (tpg) gcc-4.3.2 bug http://gcc.gnu.org/bugzilla/show_bug.cgi?id=38051
-export CFLAGS="%{optflags} -fno-strict-aliasing -fPIC"
-export CXXFLAGS=$CFLAGS
-export CPPCLAGS=$CFLAGS
 %configure2_5x \
 	--disable-static
 

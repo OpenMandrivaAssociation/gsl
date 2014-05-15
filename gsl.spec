@@ -5,13 +5,12 @@
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	1.15
-Release:	10
+Version:	1.16
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.gnu.org/gnu/gsl/%{SOURCE0}.sig
 Patch0:		%{name}-1.14-undefined-symbols.patch
 
 %description

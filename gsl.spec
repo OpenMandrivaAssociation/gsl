@@ -9,7 +9,7 @@
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	1.16
-Release:	6
+Release:	7
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
@@ -107,7 +107,7 @@ This package contains the development files for %{name}.
 %apply_patches
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static
 
 %make
@@ -149,4 +149,3 @@ make check
 %{_libdir}/*.so
 %{_mandir}/man3/*
 %{_mandir}/man1/gsl-config.*
-

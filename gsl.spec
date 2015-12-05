@@ -9,7 +9,7 @@
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	1.16
-Release:	7
+Release:	8
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
@@ -97,6 +97,7 @@ This package contains a shared library for %{name}.
 Summary:	Development files for Scientific Library
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libcblas} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{devname}

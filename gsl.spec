@@ -3,6 +3,8 @@
 %define libcblas %mklibname %{name}cblas %{major}
 %define devname %mklibname %{name} -d
 
+%define _disable_ld_no_undefined 1
+
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	2.2

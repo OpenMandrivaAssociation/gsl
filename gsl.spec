@@ -3,18 +3,15 @@
 %define libcblas %mklibname %{name}cblas %{major}
 %define devname %mklibname %{name} -d
 
-%define _disable_lto 1
-%define _disable_ld_no_undefined 1
-
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	1.16
-Release:	10
+Version:	2.2
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
-Patch0:		%{name}-1.14-undefined-symbols.patch
+#Patch0:		%{name}-1.14-undefined-symbols.patch
 
 %description
 The GNU Scientific Library (GSL) is a numerical library for C and

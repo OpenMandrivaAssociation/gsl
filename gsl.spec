@@ -1,6 +1,7 @@
-%define major 0
+%define major 19
+%define blas_major 0
 %define libname %mklibname %{name} %{major}
-%define libcblas %mklibname %{name}cblas %{major}
+%define libcblas %mklibname %{name}cblas %{blas_major}
 %define devname %mklibname %{name} -d
 
 %define _disable_ld_no_undefined 1
@@ -61,6 +62,7 @@ This doc can be viewed through info, pinfo, konqueror, gnome yelp, ...
 %package -n %{libname}
 Summary:	Shared libraries for Scientific Library
 Group:		System/Libraries
+Obsoletes:	%{mklibname gsl 0} < 2.2
 
 %description -n %{libname}
 The GNU Scientific Library (GSL) is a numerical library for C and
@@ -137,7 +139,7 @@ make check
 %{_libdir}/libgsl.so.%{major}*
 
 %files -n %{libcblas}
-%{_libdir}/libgslcblas.so.%{major}*
+%{_libdir}/libgslcblas.so.%{blas_major}*
 
 %files -n %{devname}
 %doc BUGS ChangeLog TODO doc/examples/

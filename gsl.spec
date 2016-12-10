@@ -8,7 +8,7 @@
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	2.2.1
+Version:	2.3
 Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
@@ -126,13 +126,14 @@ make check
 %multiarch_binaries %{buildroot}%{_bindir}/gsl-config
 
 %files progs
-%doc AUTHORS NEWS README THANKS
 %{_bindir}/gsl-histogram
 %{_bindir}/gsl-randist
 %{_mandir}/man1/gsl-histogram*
 %{_mandir}/man1/gsl-randist*
 
 %files doc
+%doc BUGS ChangeLog TODO doc/examples/
+%doc AUTHORS NEWS README THANKS
 %{_infodir}/*info*
 
 %files -n %{libname}
@@ -142,7 +143,6 @@ make check
 %{_libdir}/libgslcblas.so.%{blas_major}*
 
 %files -n %{devname}
-%doc BUGS ChangeLog TODO doc/examples/
 %{_bindir}/gsl-config
 %{multiarch_bindir}/gsl-config
 %{_datadir}/aclocal/*.m4

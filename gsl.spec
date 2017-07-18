@@ -122,9 +122,6 @@ make check
 %install
 %makeinstall_std
 
-#multiarch
-%multiarch_binaries %{buildroot}%{_bindir}/gsl-config
-
 %files progs
 %{_bindir}/gsl-histogram
 %{_bindir}/gsl-randist
@@ -144,7 +141,6 @@ make check
 
 %files -n %{devname}
 %{_bindir}/gsl-config
-%{multiarch_bindir}/gsl-config
 %{_datadir}/aclocal/*.m4
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc

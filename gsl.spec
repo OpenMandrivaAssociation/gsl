@@ -1,4 +1,4 @@
-%define major 19
+%define major 23
 %define blas_major 0
 %define libname %mklibname %{name} %{major}
 %define libcblas %mklibname %{name}cblas %{blas_major}

@@ -6,10 +6,12 @@
 
 %define _disable_ld_no_undefined 1
 
+%global optflags %{optflags} -O3
+
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	2.5
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
@@ -105,14 +107,13 @@ Provides:	%{name}-devel = %{version}-%{release}
 This package contains the development files for %{name}.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 %configure \
 	--disable-static
 
-%make
+%make_build
 
 %check
 %ifarch %{x86_64}
@@ -120,7 +121,7 @@ make check
 %endif
 
 %install
-%makeinstall_std
+%make_install
 
 %files progs
 %{_bindir}/gsl-histogram

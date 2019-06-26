@@ -125,6 +125,7 @@ LDFLAGS="%{ldflags} -fprofile-instr-generate" \
 %configure \
 	--disable-static
 
+%make_build
 make check
 
 unset LD_LIBRARY_PATH

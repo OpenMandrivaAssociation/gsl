@@ -8,10 +8,13 @@
 
 %global optflags %{optflags} -O3
 
+# (tpg) enable PGO build
+%bcond_without pgo
+
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	2.5
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
@@ -108,8 +111,32 @@ This package contains the development files for %{name}.
 
 %prep
 %autosetup -p1
+%config_update
 
 %build
+%if %{with pgo}
+export LLVM_PROFILE_FILE=%{name}-%p.profile.d
+export LD_LIBRARY_PATH="$(pwd)"
+CFLAGS="%{optflags} -fprofile-instr-generate" \
+CXXFLAGS="%{optflags} -fprofile-instr-generate" \
+FFLAGS="$CFLAGS_PGO" \
+FCFLAGS="$CFLAGS_PGO" \
+LDFLAGS="%{ldflags} -fprofile-instr-generate" \
+%configure \
+	--disable-static
+
+make check
+
+unset LD_LIBRARY_PATH
+unset LLVM_PROFILE_FILE
+llvm-profdata merge --output=%{name}.profile *.profile.d
+
+make clean
+
+CFLAGS="%{optflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
+CXXFLAGS="%{optflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
+LDFLAGS="%{ldflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
+%endif
 %configure \
 	--disable-static
 

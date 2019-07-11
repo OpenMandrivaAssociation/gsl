@@ -8,8 +8,12 @@
 
 %global optflags %{optflags} -O3
 
-# (tpg) enable PGO build
+# (tpg) enable PGO build, fails on i686 on sprcfunc test
+%ifnarch %{ix86}
 %bcond_without pgo
+%else
+%bcond_with pgo
+%endif
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl

@@ -10,7 +10,7 @@
 
 # (tpg) enable PGO build, fails on i686 on sprcfunc test
 %ifnarch %{ix86}
-%bcond_without pgo
+%bcond_with pgo
 %else
 %bcond_with pgo
 %endif

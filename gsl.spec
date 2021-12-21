@@ -10,20 +10,19 @@
 
 # (tpg) enable PGO build, fails on i686 on sprcfunc test
 %ifnarch %{ix86}
-%bcond_with pgo
+%bcond_without pgo
 %else
 %bcond_with pgo
 %endif
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	2.7
+Version:	2.7.1
 Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
-#Patch0:		%{name}-1.14-undefined-symbols.patch
 
 %description
 The GNU Scientific Library (GSL) is a numerical library for C and
@@ -119,13 +118,10 @@ This package contains the development files for %{name}.
 
 %build
 %if %{with pgo}
-export LLVM_PROFILE_FILE=%{name}-%p.profile.d
 export LD_LIBRARY_PATH="$(pwd)"
-CFLAGS="%{optflags} -fprofile-instr-generate" \
-CXXFLAGS="%{optflags} -fprofile-instr-generate" \
-FFLAGS="$CFLAGS_PGO" \
-FCFLAGS="$CFLAGS_PGO" \
-LDFLAGS="%{ldflags} -fprofile-instr-generate" \
+CFLAGS="%{optflags} -flto -fprofile-generate" \
+CXXFLAGS="%{optflags} -flto -fprofile-generate" \
+LDFLAGS="%{build_ldflags} -flto -fprofile-generate" \
 %configure \
 	--disable-static
 
@@ -133,14 +129,14 @@ LDFLAGS="%{ldflags} -fprofile-instr-generate" \
 make check
 
 unset LD_LIBRARY_PATH
-unset LLVM_PROFILE_FILE
-llvm-profdata merge --output=%{name}.profile *.profile.d
+llvm-profdata merge --output=%{name}-llvm.profdata $(find . -type f -name "*.profraw")
+PROFDATA="$(realpath %{name}-llvm.profdata)"
 
 make clean
 
-CFLAGS="%{optflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
-CXXFLAGS="%{optflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
-LDFLAGS="%{ldflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
+CFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
+CXXFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
+LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
 %endif
 %configure \
 	--disable-static
@@ -158,8 +154,8 @@ make check
 %files progs
 %{_bindir}/gsl-histogram
 %{_bindir}/gsl-randist
-%{_mandir}/man1/gsl-histogram*
-%{_mandir}/man1/gsl-randist*
+%doc %{_mandir}/man1/gsl-histogram*
+%doc %{_mandir}/man1/gsl-randist*
 
 %files doc
 %doc BUGS ChangeLog TODO doc/examples/
@@ -178,5 +174,5 @@ make check
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/*.so
-%{_mandir}/man3/*
-%{_mandir}/man1/gsl-config.*
+%doc %{_mandir}/man3/*
+%doc %{_mandir}/man1/gsl-config.*

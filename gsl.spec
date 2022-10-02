@@ -18,11 +18,12 @@
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
 Version:	2.7.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
+Patch0:		gsl-2.7.1-fix_undefined_symbols.patch
 
 %description
 The GNU Scientific Library (GSL) is a numerical library for C and
@@ -122,10 +123,9 @@ export LD_LIBRARY_PATH="$(pwd)"
 CFLAGS="%{optflags} -flto -fprofile-generate" \
 CXXFLAGS="%{optflags} -flto -fprofile-generate" \
 LDFLAGS="%{build_ldflags} -flto -fprofile-generate" \
-%configure \
-	--disable-static
-
+%configure
 %make_build
+
 make check
 
 unset LD_LIBRARY_PATH
@@ -138,9 +138,8 @@ CFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
 CXXFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
 LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
 %endif
-%configure \
-	--disable-static
 
+%configure
 %make_build
 
 %check

@@ -21,7 +21,7 @@ Version:	2.7.1
 Release:	3
 License:	GPLv2+
 Group:		Sciences/Mathematics
-Url:		http://www.gnu.org/software/gsl/
+Url:		https://www.gnu.org/software/gsl/
 Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
 Patch0:		gsl-2.7.1-fix_undefined_symbols.patch
 

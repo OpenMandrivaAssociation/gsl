@@ -1,8 +1,10 @@
 %define major 27
 %define blas_major 0
-%define libname %mklibname %{name} %{major}
-%define libcblas %mklibname %{name}cblas %{blas_major}
+%define libname %mklibname %{name}
+%define libcblas %mklibname %{name}cblas
 %define devname %mklibname %{name} -d
+%define oldlibname %mklibname %{name} 27
+%define oldlibcblas %mklibname %{name}cblas 0
 
 %define _disable_ld_no_undefined 1
 
@@ -17,8 +19,8 @@
 
 Summary:	The GNU Scientific Library for numerical analysis
 Name:		gsl
-Version:	2.7.1
-Release:	3
+Version:	2.8
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		https://www.gnu.org/software/gsl/
@@ -71,7 +73,7 @@ This doc can be viewed through info, pinfo, konqueror, gnome yelp, ...
 %package -n %{libname}
 Summary:	Shared libraries for Scientific Library
 Group:		System/Libraries
-Obsoletes:	%{mklibname gsl 0} < 2.2
+%rename %{oldlibname}
 
 %description -n %{libname}
 The GNU Scientific Library (GSL) is a numerical library for C and
@@ -98,6 +100,7 @@ Further information can be found in the GSL Reference Manual.
 Summary:	Shared libraries for Scientific Library
 Group:		System/Libraries
 Conflicts:	%{_lib}gsl0 < 1.15-5
+%rename %{oldlibcblas}
 
 %description -n %{libcblas}
 This package contains a shared library for %{name}.
@@ -144,7 +147,7 @@ LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
 
 %check
 %ifarch %{x86_64}
-make check
+LD_LIBRARY_PATH=%{buildroot}%{_libdir}:$LD_LIBRARY_PATH make check
 %endif
 
 %install

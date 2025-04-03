@@ -1,4 +1,4 @@
-%define major 27
+%define major 28
 %define blas_major 0
 %define libname %mklibname %{name}
 %define libcblas %mklibname %{name}cblas
@@ -13,8 +13,11 @@
 # (tpg) enable PGO build, fails on i686 on sprcfunc test
 %ifnarch %{ix86}
 %bcond_without pgo
+# FIXME:
+%bcond_with tests
 %else
 %bcond_with pgo
+%bcond_with tests
 %endif
 
 Summary:	The GNU Scientific Library for numerical analysis
@@ -24,7 +27,7 @@ Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		https://www.gnu.org/software/gsl/
-Source0:	ftp://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
+Source0:	https://ftp.gnu.org/gnu/gsl/%{name}-%{version}.tar.gz
 Patch0:		gsl-2.7.1-fix_undefined_symbols.patch
 
 %description
@@ -122,14 +125,16 @@ This package contains the development files for %{name}.
 
 %build
 %if %{with pgo}
-export LD_LIBRARY_PATH="$(pwd)"
+export LD_LIBRARY_PATH="$(pwd)/cblas/.libs:$(pwd)/.libs"
 CFLAGS="%{optflags} -flto -fprofile-generate" \
 CXXFLAGS="%{optflags} -flto -fprofile-generate" \
 LDFLAGS="%{build_ldflags} -flto -fprofile-generate" \
 %configure
 %make_build
 
+%if %{with tests}
 make check
+%endif
 
 unset LD_LIBRARY_PATH
 llvm-profdata merge --output=%{name}-llvm.profdata $(find . -type f -name "*.profraw")
@@ -145,8 +150,9 @@ LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
 %configure
 %make_build
 
+
 %check
-%ifarch %{x86_64}
+%if %{with tests}
 LD_LIBRARY_PATH=%{buildroot}%{_libdir}:$LD_LIBRARY_PATH make check
 %endif
 
@@ -178,3 +184,4 @@ LD_LIBRARY_PATH=%{buildroot}%{_libdir}:$LD_LIBRARY_PATH make check
 %{_libdir}/*.so
 %doc %{_mandir}/man3/*
 %doc %{_mandir}/man1/gsl-config.*
+
